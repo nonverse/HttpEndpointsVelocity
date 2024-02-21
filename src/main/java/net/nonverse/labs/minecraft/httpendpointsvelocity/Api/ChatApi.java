@@ -2,7 +2,7 @@ package net.nonverse.labs.minecraft.httpendpointsvelocity.Api;
 
 import com.velocitypowered.api.proxy.Player;
 import io.javalin.http.Context;
-import io.javalin.http.UnauthorizedResponse;
+import io.javalin.http.UnprocessableContentResponse;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,8 +21,8 @@ public class ChatApi {
             Player player = Objects.requireNonNull(ctx.attribute("user"));
 
             player.sendMessage(message);
-        } catch (NullPointerException nullPointerException) {
-            throw new UnauthorizedResponse("Player is not online");
+        } catch (NullPointerException e) {
+            throw new UnprocessableContentResponse();
         }
     }
 }
