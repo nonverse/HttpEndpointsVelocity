@@ -18,6 +18,9 @@ repositories {
 dependencies {
     compileOnly "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
     annotationProcessor "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
+    implementation 'io.javalin:javalin:6.0.0'
+    implementation 'com.auth0:java-jwt:4.4.0'
+    implementation 'commons-io:commons-io:2.6'
 }
 
 def targetJavaVersion = 19

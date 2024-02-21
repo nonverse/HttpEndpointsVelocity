@@ -26,15 +26,32 @@ public class HttpEndpointsVelocity {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
-        instance = this;
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
+        startWebServer();
 
+        instance = this;
     }
 
-    public HttpEndpointsVelocity getInstance() {
-        return this;
+    /**
+     * Start the webserver and configure all routes and middlewares
+     */
+    private void startWebServer() {
+        WebServer server = new WebServer(logger);
+
+        server.start();
+
+        Routes.registerRoutes(server, logger);
+        Middlewares.registerMiddlewares(server, logger, this.dataDirectory);
+    }
+
+    public ProxyServer getServer() {
+        return this.server;
+    }
+
+    public static HttpEndpointsVelocity getInstance() {
+        return instance;
     }
 }
